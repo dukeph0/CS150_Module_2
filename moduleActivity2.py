@@ -12,13 +12,18 @@
 import psutil
 import time
 
+duration = 10
+
+print("Ten Second Analysis For Active System Processes Starting.....")
+
 def displayAllRunningProcesses():
 
-    # add a wait to get a better reading on running processes
-    time.sleep(1)
+    # add a second wait to get a better reading on running processes
+    for i in range(1, duration + 1):
+        print(f"{i}...", end=" ", flush=True)
+        time.sleep(1)
 
-    print("Analyzing Active System Processes......")
-    print("-" * 100)
+    print("\n" + "-" * 100)
 
     # iterate through all the running processes and search for process id and name
     for proc in psutil.process_iter(['pid', 'name', 'status', 'cpu_percent', 'memory_percent']):
