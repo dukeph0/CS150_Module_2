@@ -14,6 +14,7 @@ import time
 
 def displayAllRunningProcesses():
 
+    # add a wait to get a better reading on running processes
     time.sleep(1)
 
     print("Analyzing Active System Processes......")
@@ -43,7 +44,8 @@ def displayAllRunningProcesses():
                 print(f"    Memory Usage: {memoryPercent:.10f}%")
                 print("-" * 100)
 
-        except(psutil.NoSuchProcess, psutil.AccessDenied):
+        except(psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+            # have a handler for processes that may have been terminated or are inaccessible
             continue
 
 if __name__ == "__main__":
