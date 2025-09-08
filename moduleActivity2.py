@@ -1,4 +1,5 @@
-# Purpose: Use Python module psutil to display the running processes and information for each process, such as the process id and process name. 
+# Purpose: Develop a Python program that analyzes and displays components of active system processes. This type of program is critical for optimizing
+# application performance, ensuring system stability, and improving overall efficieny in real-world programming environments.
 
 # Expected Result: The program should display the running processes and information for each process, such as the process id and process name.
 
@@ -13,18 +14,37 @@ import time
 
 def displayAllRunningProcesses():
 
+    time.sleep(1)
+
+    print("Analyzing Active System Processes......")
+    print("-" * 100)
+
     # iterate through all the running processes and search for process id and name
     for proc in psutil.process_iter(['pid', 'name', 'status', 'cpu_percent', 'memory_percent']):
+        try:
 
-        # get all requested data
-        processInfo = proc.info
+            # get all requested data
+            processInfo = proc.info
 
-        # extract data for status
-        status = processInfo['status']
+            # extract data to be displayed
+            processId = processInfo['pid']
+            processName = processInfo['name']
+            status = processInfo['status']
+            cpuPercent = processInfo['cpu_percent']
+            memoryPercent = processInfo['memory_percent']
 
-        # filter for only running processes 
-        if status in [psutil.STATUS_RUNNING]:
-            print(proc.info)
+            # filter for only running processes 
+            if status in [psutil.STATUS_RUNNING]:
+
+                # Display analyzed data in a human readable format
+                print(f"Process: {processName} (PID: {processId})")
+                print(f"    Status:  {status}")
+                print(f"    CPU Usage: {cpuPercent:.10f}%")
+                print(f"    Memory Usage: {memoryPercent:.10f}%")
+                print("-" * 100)
+
+        except(psutil.NoSuchProcess, psutil.AccessDenied):
+            continue
 
 if __name__ == "__main__":
     displayAllRunningProcesses()
