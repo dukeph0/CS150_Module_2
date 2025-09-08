@@ -20,6 +20,6 @@ cd Module2_Activity
 python3 moduleActivity2.py
 ```
 
-Running the program will give you the processes that are running...
+The program will output the processes that are running...
 
 
