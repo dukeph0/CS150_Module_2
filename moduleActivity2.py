@@ -18,7 +18,7 @@ print("Ten Second Analysis For Active System Processes Starting.....")
 
 def displayAllRunningProcesses():
 
-    # add a second wait to get a better reading on running processes
+    # add 10 second wait to get a better reading on running processes
     for i in range(1, duration + 1):
         print(f"{i}...", end=" ", flush=True)
         time.sleep(1)
@@ -40,7 +40,7 @@ def displayAllRunningProcesses():
             memoryPercent = processInfo['memory_percent']
 
             # filter for only running processes 
-            if status in [psutil.STATUS_RUNNING]:
+            if (status == "running"):
 
                 # Display analyzed data in a human readable format
                 print(f"Process: {processName} (PID: {processId})")
